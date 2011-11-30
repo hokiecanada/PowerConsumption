@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Device:</b>
+  <%= @outlet.device %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @outlet.status %>
+</p>
+
+
+<script>
+    $(document).ready(
+          function(){
+            setInterval(function(){
+              $('#plot').load("/outlets/<%= @outlet.id %>/graph");
+			  $('#data').replaceWith(
+        }, 2000);
+      });
+</script>
+
+<div id="plot">
+
+</div>
+
+
+<p>		
+  <%= link_to 'Edit', edit_outlet_path(@outlet) %> |
+  <%= link_to 'Back', outlets_path %>
+</p>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Device:</b>
+  <%= @outlet.device %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @outlet.status %>
+</p>
+
+<h2>Logs:</h2>
+<% @logs.each_with_index do |log,i| %>
+	<%= i %>: <%= log.watts %>W, <%= log.time %><br>
+<% end %>
+
+	
+<%= link_to 'Edit', edit_outlet_path(@outlet) %> |
+<%= link_to 'Back', outlets_path %>

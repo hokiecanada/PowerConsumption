@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Device:</b>
+  <%= @outlet.device %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @outlet.status %>
+</p>
+
+<div id="plot">
+	<%= render :template => 'outlets/graph' %>
+</div>
+
+
+<p>		
+  <%= link_to 'Edit', edit_outlet_path(@outlet) %> |
+  <%= link_to 'Back', outlets_path %>
+</p>

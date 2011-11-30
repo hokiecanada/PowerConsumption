@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  watts: 1
+  time: 2011-11-27 02:07:39
+  outlet: 
+
+two:
+  watts: 1
+  time: 2011-11-27 02:07:39
+  outlet: 
