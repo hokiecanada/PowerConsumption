@@ -1,8 +1,9 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
-gem 'sqlite3'
+group :development, :test do
+	gem 'sqlite3-ruby', :require => 'sqlite3'
+end
 
-gem 'activerecord-postgresql-adapter'
 gem 'jquery-rails'
 
