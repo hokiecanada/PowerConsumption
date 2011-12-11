@@ -10,7 +10,7 @@ class LogsController < ApplicationController
 	log = outlet.logs.create(params[:log])
 	log.time = DateTime.now
     if log.save
-		response = { '111' }
+		response = { :status =>  @outlet.status }
 		render json: response.to_json()
 	else
 		response = { :status => 1, :time => Time.now }
