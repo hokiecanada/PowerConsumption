@@ -2,11 +2,18 @@ class OutletsController < ApplicationController
   # GET /outlets
   # GET /outlets.json
   def index
-    @outlets = Outlet.all
 	@outlet1 = Outlet.find(1)
+	count = @outlet1.logs.last.id
+	@logs1 = @outlet1.logs.find(:all,:conditions => ['id > ?', count-31])
+	
 	@outlet2 = Outlet.find(2)
+	count = @outlet2.logs.last.id
+	@logs2 = @outlet2.logs.find(:all,:conditions => ['id > ?', count-31])
+	
 	@outlet3 = Outlet.find(3)
-
+	count = @outlet3.logs.last.id
+	@logs3 = @outlet3.logs.find(:all,:conditions => ['id > ?', count-31])
+	
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @outlets }
