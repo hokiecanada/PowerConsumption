@@ -17,7 +17,7 @@ class LogsController < ApplicationController
 		response = { :status =>  (o1 + o2 + o3) }
 		render json: response.to_json()
 	else
-		response = { :status => 1, :time => Time.now }
+		response = { :status =>  (o1 + o2 + o3) }
 		render json: response.to_json()
 	end
   end
