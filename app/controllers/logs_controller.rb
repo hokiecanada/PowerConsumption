@@ -18,14 +18,10 @@ class LogsController < ApplicationController
 	outlet.second = log.watts
 	minute = outlet.logs.where(:all, :conditions => ["time > ?", 1.minutes.ago])
 	outlet.minute = minute.sum("watts") / minute.count
+	outlet.save
 	
-    if log.save
-		response = { :status =>  (o1 + o2 + o3) }
-		render json: response.to_json()
-	else
-		response = { :status =>  (o1 + o2 + o3) }
-		render json: response.to_json()
-	end
+	response = o1 + o2 + o3
+	render json: response.to_json()
   end
 
   def destroy
