@@ -8,7 +8,7 @@
 			var series = this.series[0];
 			var data = this.series[0].data;
 			setInterval(function() {
-				$.get('/outlets/<%= @outlet.id %>/graph', function(newData) {
+				$.get('/outlets/<%= @outlet3.id %>/graph', function(newData) {
 						data = newData;
 						series.setData(data);
 				}, 'json');

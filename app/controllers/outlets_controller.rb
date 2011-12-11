@@ -3,6 +3,9 @@ class OutletsController < ApplicationController
   # GET /outlets.json
   def index
     @outlets = Outlet.all
+	@outlet1 = Outlet.find(1)
+	@outlet2 = Outlet.find(2)
+	@outlet3 = Outlet.find(3)
 
     respond_to do |format|
       format.html # index.html.erb
