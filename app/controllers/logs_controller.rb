@@ -13,6 +13,12 @@ class LogsController < ApplicationController
 	
 	log = outlet.logs.create(params[:log])
 	log.time = DateTime.now
+	log.save
+	
+	outlet.second = log.watts
+	minute = outlet.logs.where(:all, :conditions => ["time > ?", 1.minutes.ago])
+	outlet.minute = minute.sum("watts") / minute.count
+	
     if log.save
 		response = { :status =>  (o1 + o2 + o3) }
 		render json: response.to_json()
