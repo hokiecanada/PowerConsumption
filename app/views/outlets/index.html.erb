@@ -11,7 +11,12 @@
 
 <% @outlets.each do |outlet| %>
   <tr>
-    <td><%= outlet.device %></td>
+	<td><div id="plot">
+			<%= render :template => 'outlets/graph' %>
+	</div></td>
+  </tr>
+  <tr>
+	<td><%= outlet.device %></td>
     <td><%= outlet.status %></td>
     <td><%= link_to 'Show', outlet %></td>
     <td><%= link_to 'Edit', edit_outlet_path(outlet) %></td>
@@ -19,19 +24,6 @@
   </tr>
 <% end %>
 </table>
-
-<div id="plot">
-	<%= render :template => 'outlets/graph1' %>
-</div>
-
-<div id="plot">
-	<%= render :template => 'outlets/graph2' %>
-</div>
-
-<div id="plot">
-	<%= render :template => 'outlets/graph3' %>
-</div>
-
 
 <br />
 
