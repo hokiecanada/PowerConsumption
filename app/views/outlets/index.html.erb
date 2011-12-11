@@ -12,7 +12,7 @@
 <% @outlets.each do |outlet| %>
   <tr>
 	<td><div id="plot">
-			<%= render :template => 'outlets/graph' %>
+			<%= render :template => 'outlets/graph', :outlet => outlet %>
 	</div></td>
   </tr>
   <tr>

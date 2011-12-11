@@ -34,9 +34,9 @@ class OutletsController < ApplicationController
 
   
   def graph
-	outlet = Outlet.find(params[:id])
-	count = outlet.logs.last.id
-	logs = outlet.logs.find(:all, :conditions => ['id > ?', count-31])
+	@outlet = Outlet.find(params[:id])
+	count = @outlet.logs.last.id
+	logs = @outlet.logs.find(:all, :conditions => ['id > ?', count-31])
     
 	respond_to do |format|
       format.json { render json: logs.collect{|l| l.watts} }
