@@ -17,18 +17,21 @@
 		}
       },
       title: {
-        text: "Wattage over Time"
+        text: ""
       },
       xAxis: {
-        type: "datetime"
+        title: {
+          text: "Time"
+        }
       },
       yAxis: {
         title: {
-          text: "Dollars"
+          text: "Watts"
         }
       },
       series: [{
-		data: <%= @logs2.collect{|l| l.watts} %>
+		data: <%= @logs2.collect{|l| l.watts} %>,
+		showInLegend: false
       }]
     });
   });

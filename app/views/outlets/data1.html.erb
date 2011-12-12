@@ -2,13 +2,13 @@
   $(function() {
     new Highcharts.Chart({
       chart: {
-        renderTo: "tracking_chart3",
+        renderTo: "tracking_chart1",
 		events: {
 		  load: function() {
 			var series = this.series[0];
 			var data = this.series[0].data;
 			setInterval(function() {
-				$.get('/outlets/<%= @outlet3.id %>/graph3', function(newData) {
+				$.get('/outlets/1/graph1', function(newData) {
 						data = newData;
 						series.setData(data);
 				}, 'json');
@@ -17,25 +17,19 @@
 		}
       },
       title: {
-        text: ""
+        text: "Wattage over Time"
       },
       xAxis: {
-        title: {
-          text: "Time"
-        }
+        type: "datetime"
       },
       yAxis: {
         title: {
-          text: "Watts"
+          text: "Dollars"
         }
       },
       series: [{
-		data: <%= @logs3.collect{|l| l.watts} %>,
-		showInLegend: false
+		data: <%= @logs1.collect{|l| l.watts} %>
       }]
     });
   });
 </script>
-
-<div id="tracking_chart3" style="width:400px; height:300px;">
-</div>

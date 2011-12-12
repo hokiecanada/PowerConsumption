@@ -1,36 +1,53 @@
 <center>
-<h1>Outlet Summary</h1>
-<i>Click any outlet to see a more detailed page</i>
-</center>
+<div id="title">
+Consumption Overview
+</div>
 
-<table>
+<table cellpadding="10px">
 	<tr>
 		<td>
-			<%= link_to outlet_path(@outlet1) do %> 
-				<center>
-					<%= render :template => 'outlets/graph1' %><br>
-					Total daily:<br>
-					Total weekly:<br>
-					Total monthly:<br>
-				</center>
-			<% end %>
+			<center>
+				<div id="subtitle">Outlet #1</div>
+				<div id="graph"><%= render :template => 'outlets/graph1' %></div>
+				<div id="usage">
+					Past day: <%= @outlet1.day %>W<br>
+					Past week: <%= @outlet1.week %>W<br>
+					Past month: <%= @outlet1.month %>W<br>
+				</div>
+				<div id="usage">
+					<%= button_to "More Details", outlet_path(@outlet1) %>
+				</div>
+			</center>
 		</td>
-		<td><center>
-			<%= render :template => 'outlets/graph2' %><br>
-			Total daily:<br>
-			Total weekly:<br>
-			Total monthly:<br>
-		</center>
+		<td>
+			<center>
+				<div id="subtitle">Outlet #2</div>
+				<div id="graph"><%= render :template => 'outlets/graph2' %></div>
+				<div id="usage">
+					Past day: <%= @outlet2.day %>W<br>
+					Past week: <%= @outlet2.week %>W<br>
+					Past month: <%= @outlet2.month %>W<br>
+				</div>
+				<div id="usage">
+					<%= button_to "More Details", outlet_path(@outlet2) %>
+				</div>
+			</center>
 		</td>
-		<td><center>	
-			<%= render :template => 'outlets/graph3' %><br>
-			Total daily:<br>
-			Total weekly:<br>
-			Total monthly:<br>
-		</center>
+		<td>
+			<center>	
+				<div id="subtitle">Outlet #3</div>
+				<div id="graph"><%= render :template => 'outlets/graph3' %></div>
+				<div id="usage">
+					Past day: <%= @outlet3.day %>W<br>
+					Past week: <%= @outlet3.week %>W<br>
+					Past month: <%= @outlet3.month %>W<br>
+				</div>
+				<div id="usage">
+					<%= button_to "More Details", outlet_path(@outlet3) %>
+				</div>
+			</center>
 		</td>
 	</tr>
 </table>
 
-<br />
-
+</center>

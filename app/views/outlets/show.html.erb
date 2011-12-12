@@ -1,21 +1,50 @@
-<p id="notice"><%= notice %></p>
+<div id="title">Outlet #<%= @outlet.id %> Details</div>
 
-<p>
-  <b>Device:</b>
-  <%= @outlet.device %>
-</p>
+<center>
+<table cellpadding="10px">
+	<tr>
+		<td>
+			<div id="subtitle">Status:</div>
+			<div id="status">
+				<% if @outlet.status == 1 %>
+					<b>ON</b>
+				<% else %>
+					<b>OFF</b>
+				<% end %>
+				<table>
+					<tr>
+						<td><%= button_to "Turn Outlet ON", power_on_path(:id => @outlet), :disabled => (@outlet.status == 1) %></td>
+						<td><%= button_to "Turn Outlet OFF", power_off_path(:id => @outlet), :disabled => (@outlet.status == 0) %></td>
+					</tr>
+				</table>
+			</div>
+		</td>
+		<td>
+			
+			<% if @outlet.id == 1 %>
+				<div id="subtitle">Real-time Consumption of Outlet #1</div>
+				<div id="graph"><%= render :template => 'outlets/detail1' %></div>
+			<% elsif @outlet.id == 2 %>
+				<div id="subtitle">Real-time Consumption of Outlet #2</div>
+				<div id="graph"><%= render :template => 'outlets/detail2' %></div>
+			<% else %>
+				<div id="subtitle">Real-time Consumption of Outlet #3</div>
+				<div id="graph"><%= render :template => 'outlets/detail3' %></div>
+			<% end %>
+		</td>
+		<td>
+			<div id="subtitle">Details:</div>
+			<div id="details">
+				<b><u>Energy Consumption for Outlet #<%= @outlet.id %></u></b>:<br>
+				Past day: <%= @outlet.day %>W<br>
+				Past week: <%= @outlet.week %>W<br>
+				Past month: <%= @outlet.month %>W<br>
+			</div>
+		</td>
+	</tr>
+</table>
+</center>
 
-<p>
-  <b>Status:</b>
-  <%= @outlet.status %>
-</p>
-
-<div id="plot">
-	<%= render :template => 'outlets/graph' %>
+<div id="link">	
+  <%= button_to "Main Page", outlets_path, :method => :get %>
 </div>
-
-
-<p>		
-  <%= link_to 'Edit', edit_outlet_path(@outlet) %> |
-  <%= link_to 'Back', outlets_path %>
-</p>

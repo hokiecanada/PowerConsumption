@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111127070702) do
+ActiveRecord::Schema.define(:version => 20111211175814) do
 
   create_table "logs", :force => true do |t|
     t.integer  "watts"
@@ -28,6 +28,12 @@ ActiveRecord::Schema.define(:version => 20111127070702) do
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "second"
+    t.float    "minute"
+    t.float    "hour"
+    t.float    "day"
+    t.float    "week"
+    t.float    "month"
   end
 
 end

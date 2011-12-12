@@ -2,13 +2,13 @@
   $(function() {
     new Highcharts.Chart({
       chart: {
-        renderTo: "tracking_chart3",
+        renderTo: "tracking_chart1",
 		events: {
 		  load: function() {
 			var series = this.series[0];
 			var data = this.series[0].data;
 			setInterval(function() {
-				$.get('/outlets/<%= @outlet3.id %>/graph3', function(newData) {
+				$.get('/outlets/1/detail1', function(newData) {
 						data = newData;
 						series.setData(data);
 				}, 'json');
@@ -30,12 +30,12 @@
         }
       },
       series: [{
-		data: <%= @logs3.collect{|l| l.watts} %>,
+		data: <%= @logs.collect{|l| l.watts} %>,
 		showInLegend: false
       }]
     });
   });
 </script>
 
-<div id="tracking_chart3" style="width:400px; height:300px;">
+<div id="tracking_chart1" style="width:600px; height:350px;">
 </div>
