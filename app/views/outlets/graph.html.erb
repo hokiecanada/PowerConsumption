@@ -3,36 +3,60 @@
     new Highcharts.Chart({
       chart: {
         renderTo: "tracking_chart",
+		defaultSeriesType: "line",
 		events: {
 		  load: function() {
-			var series = this.series[0];
-			var data = this.series[0].data;
+			var series1 = this.series[0];
+			var series2 = this.series[1];
+			var series3 = this.series[2];
+			var data1 = this.series[0].data;
+			var data2 = this.series[1].data;
+			var data3 = this.series[2].data;
 			setInterval(function() {
-				$.get('/outlets/<%= @outlet.id %>/graph', function(newData) {
+				$.get('/outlets/1/graph', function(newData) {
 						data = newData;
-						series.setData(data);
+						series1.setData(data);
 				}, 'json');
-			}, 1000);
+				$.get('/outlets/2/graph', function(newData) {
+						data = newData;
+						series2.setData(data);
+				}, 'json');
+				$.get('/outlets/3/graph', function(newData) {
+						data = newData;
+						series3.setData(data);
+				}, 'json');
+			}, 3000);
 		  }
 		}
       },
       title: {
-        text: "Wattage over Time"
+        text: ""
       },
       xAxis: {
-        type: "datetime"
+        title: {
+          text: "Time"
+        }
       },
       yAxis: {
         title: {
-          text: "Dollars"
+          text: "Watts"
         }
       },
       series: [{
-		data: <%= @logs.collect{|l| l.watts} %>
-      }]
+		name: "Outlet #1",
+		data: <%= @logs1 %>
+      },
+	  {
+		name: "Outlet #2",
+		data: <%= @logs2 %>
+	  },
+	  {
+		name: "Outlet #3",
+		data: <%= @logs3 %>
+	  }]
     });
   });
 </script>
 
-<div id="tracking_chart" style="width:400px; height:300px;">
+<div id="tracking_chart" style="width:1000px; height:300px;">
 </div>

@@ -3,21 +3,12 @@
 Consumption Overview
 </div>
 
-<table>
-	<tr>
-		<th colspan=3><div id="subtitle">Real-time Consumption Visualizer</div></th>
-	</tr>
-	<tr>
-		<td colspan=3>
-			<center>
-				<div id="graph"><%= render :template => 'outlets/graph' %></div>
-			</center>
-		</td>
-	</tr>
+<table cellpadding="10px">
 	<tr>
 		<td>
 			<center>
-				<div id="subtitle"><u>Outlet #1</u></div>
+				<div id="subtitle">Outlet #1</div>
+				<div id="graph"><%= render :template => 'outlets/graph1' %></div>
 				<div id="usage">
 					Past day: <%= @outlet1.day %>W<br>
 					Past week: <%= @outlet1.week %>W<br>
@@ -30,7 +21,8 @@ Consumption Overview
 		</td>
 		<td>
 			<center>
-				<div id="subtitle"><u>Outlet #2</u></div>
+				<div id="subtitle">Outlet #2</div>
+				<div id="graph"><%= render :template => 'outlets/graph2' %></div>
 				<div id="usage">
 					Past day: <%= @outlet2.day %>W<br>
 					Past week: <%= @outlet2.week %>W<br>
@@ -43,7 +35,8 @@ Consumption Overview
 		</td>
 		<td>
 			<center>	
-				<div id="subtitle"><u>Outlet #3</u></div>
+				<div id="subtitle">Outlet #3</div>
+				<div id="graph"><%= render :template => 'outlets/graph3' %></div>
 				<div id="usage">
 					Past day: <%= @outlet3.day %>W<br>
 					Past week: <%= @outlet3.week %>W<br>

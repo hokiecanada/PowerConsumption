@@ -1,13 +1,26 @@
 class LogsController < ApplicationController
   
   def create
-	outlet = Outlet.find(params[:outlet_id])
-	o1 = Outlet.find(1).status.to_s()
-	o2 = Outlet.find(2).status.to_s()
-	o3 = Outlet.find(3).status.to_s()
+	#outlet = Outlet.find(params[:outlet_id])
+	#o1 = Outlet.find(1).status.to_s()
+	#o2 = Outlet.find(2).status.to_s()
+	#o3 = Outlet.find(3).status.to_s()
+
+	outlet1 = Outlet.find(1)
+	outlet2 = Outlet.find(2)
+	outlet3 = Outlet.find(3)
 	
-	log = outlet.logs.create(params[:log])
-	log.save
+	log1 = outlet1.logs.create(params[:log1])
+	log2 = outlet2.logs.create(params[:log2])
+	log3 = outlet3.logs.create(params[:log3])
+	
+	log1.save
+	log2.save
+	log3.save
+	
+	o1 = outlet1.status.to_s()
+	o2 = outlet2.status.to_s()
+	o3 = outlet3.status.to_s()
 	
 	#outlet.second = log.watts
 	#minute = outlet.logs.find(:all, :conditions => ["created_at > ?", 1.minutes.ago.to_datetime()])
@@ -22,7 +35,7 @@ class LogsController < ApplicationController
 	#outlet.month = month.collect{|l| l.watts}.sum / month.count
 	#outlet.save
 	
-	response = o1 + o2 + o3
+	response = "status=" + o1 + o2 + o3
 	render json: response.to_json()
   end
 

@@ -3,18 +3,21 @@ class OutletsController < ApplicationController
   # GET /outlets.json
   def index
 	@outlet1 = Outlet.find(1)
-	count = @outlet1.logs.last.id
-	@logs1 = @outlet1.logs.find(:all,:conditions => ['id > ?', count-31])
+	#count = @outlet1.logs.last.id
+	#@logs1 = @outlet1.logs.find(:all,:conditions => ['id > ?', count-31])
+	@logs1 = @outlet1.logs.collect{|l| l.watts}
 	data1()
 	
 	@outlet2 = Outlet.find(2)
-	count = @outlet2.logs.last.id
-	@logs2 = @outlet2.logs.find(:all,:conditions => ['id > ?', count-31])
+	#count = @outlet2.logs.last.id
+	#@logs2 = @outlet2.logs.find(:all,:conditions => ['id > ?', count-31])
+	@logs2 = @outlet2.logs.collect{|l| l.watts}
 	data2()
 	
 	@outlet3 = Outlet.find(3)
-	count = @outlet3.logs.last.id
-	@logs3 = @outlet3.logs.find(:all,:conditions => ['id > ?', count-31])
+	#count = @outlet3.logs.last.id
+	#@logs3 = @outlet3.logs.find(:all,:conditions => ['id > ?', count-31])
+	@logs3 = @outlet3.logs.collect{|l| l.watts}
 	data3()
 	
     respond_to do |format|
@@ -22,13 +25,26 @@ class OutletsController < ApplicationController
       format.json { render json: @outlets }
     end
   end
+ 
 
+  def graph
+	outlet = Outlet.find(params[:id])
+	#count = outlet.logs.last.id
+	#logs = outlet.logs.find(:all, :conditions => ['id > ?', count-31])
+    logs = outlet.logs
+	
+	respond_to do |format|
+      format.json { render json: logs.collect{|l| l.watts} }
+    end
+  end
+  
   
   def graph1
 	outlet = Outlet.find(1)
-	count = outlet.logs.last.id
-	logs = outlet.logs.find(:all, :conditions => ['id > ?', count-31])
-    
+	#count = outlet.logs.last.id
+	#logs = outlet.logs.find(:all, :conditions => ['id > ?', count-31])
+    logs = outlet.logs
+	
 	respond_to do |format|
       format.json { render json: logs.collect{|l| l.watts} }
     end
@@ -37,9 +53,10 @@ class OutletsController < ApplicationController
 
   def graph2
 	outlet = Outlet.find(2)
-	count = outlet.logs.last.id
-	logs = outlet.logs.find(:all, :conditions => ['id > ?', count-31])
-    
+	#count = outlet.logs.last.id
+	#logs = outlet.logs.find(:all, :conditions => ['id > ?', count-31])
+    logs = outlet.logs
+	
 	respond_to do |format|
       format.json { render json: logs.collect{|l| l.watts} }
     end
@@ -48,9 +65,10 @@ class OutletsController < ApplicationController
   
   def graph3
 	outlet = Outlet.find(3)
-	count = outlet.logs.last.id
-	logs = outlet.logs.find(:all, :conditions => ['id > ?', count-31])
-    
+	#count = outlet.logs.last.id
+	#logs = outlet.logs.find(:all, :conditions => ['id > ?', count-31])
+    logs = outlet.logs
+	
 	respond_to do |format|
       format.json { render json: logs.collect{|l| l.watts} }
     end
@@ -60,44 +78,39 @@ class OutletsController < ApplicationController
   
     def detail1
 	outlet = Outlet.find(1)
-	count = outlet.logs.last.id
-	logs = outlet.logs.find(:all, :conditions => ['id > ?', count-101])
-    
-	respond_to do |format|
-      format.json { render json: logs.collect{|l| l.watts} }
-    end
+	#count = outlet.logs.last.id
+	#logs = outlet.logs.find(:all, :conditions => ['id > ?', count-101])
+    render json: Outlet.find(1).logs.collect{|l| l.watts}
   end
 
 
   def detail2
-	outlet = Outlet.find(2)
-	count = outlet.logs.last.id
-	logs = outlet.logs.find(:all, :conditions => ['id > ?', count-101])
-    
-	respond_to do |format|
-      format.json { render json: logs.collect{|l| l.watts} }
-    end
+	#outlet = Outlet.find(2)
+	#count = outlet.logs.last.id
+	#logs = outlet.logs.find(:all, :conditions => ['id > ?', count-101])
+	render json: Outlet.find(2).logs.collect{|l| l.watts}
   end
 
   
   def detail3
-	outlet = Outlet.find(3)
-	count = outlet.logs.last.id
-	logs = outlet.logs.find(:all, :conditions => ['id > ?', count-101])
-    
-	respond_to do |format|
-      format.json { render json: logs.collect{|l| l.watts} }
-    end
+	#outlet = Outlet.find(3)
+	#count = outlet.logs.last.id
+	#logs = outlet.logs.find(:all, :conditions => ['id > ?', count-101])
+	render json: Outlet.find(3).logs.collect{|l| l.watts}
   end
   
+  def detail
+	render json: Outlet.find(params[:id]).logs.collect{|l| l.watts}
+  end
   
   # GET /outlets/1
   # GET /outlets/1.json
   def show
     @outlet = Outlet.find(params[:id])
-	count = @outlet.logs.last.id
-	@logs = @outlet.logs.find(:all,:conditions => ['id > ?', count-31])
-	@time = DateTime.now
+	#count = @outlet.logs.last.id
+	#@logs = @outlet.logs.find(:all,:conditions => ['id > ?', count-31])
+	#@time = DateTime.now
+	@logs = @outlet.logs.collect{|l| l.watts}
 	
     respond_to do |format|
       format.html # show.html.erb
@@ -194,21 +207,21 @@ class OutletsController < ApplicationController
 	#outlet.hour = hour.collect{|l| l.watts}.sum / hour.count
 	
 	day = outlet.logs.find(:all, :conditions => ["created_at > ?", 1.day.ago.to_datetime()])
-	if day.count > 0
+	if !day.nil?
 		outlet.day = day.collect{|l| l.watts}.sum
 	else
 		outlet.day = 0
 	end
 		
 	week = outlet.logs.find(:all, :conditions => ["created_at > ?", 1.week.ago.to_datetime()])
-	if week.count > 0
+	if !week.nil?
 		outlet.week = week.collect{|l| l.watts}.sum
 	else
 		outlet.week = 0
 	end
 	
 	month = outlet.logs.find(:all, :conditions => ["created_at > ?", 1.month.ago.to_datetime()])
-	if month.count > 0
+	if !month.nil?
 		outlet.month = month.collect{|l| l.watts}.sum
 	else
 		outlet.month = 0
